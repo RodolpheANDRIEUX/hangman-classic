@@ -6,6 +6,7 @@ import (
 	"math/rand"
 	"os"
 	"strings"
+	"runtime"
 )
 
 // GetWord returns a random word from the words.txt file
@@ -14,7 +15,10 @@ func GetWord() string {
 	if err != nil {
 		log.Fatal(fmt.Println("Error: ", err))
 	}
-	sep := []byte{13, 10}
+	sep := "\n"
+	if runtime.GOOS == "windows" {
+		sep = string([]byte{13, 10})
+	}
 	Words := strings.Split(string(Data), string(sep))
 	Word := strings.ToUpper(Words[rand.Intn(len(Words))])
 	return Word
