@@ -11,7 +11,7 @@ import (
 
 // GetWord returns a random word from the words.txt file
 func GetWord() string {
-	Data, err := os.ReadFile("Files/" + os.Args[1])
+	Content, err := os.ReadFile("Files/" + os.Args[1])
 	if err != nil {
 		log.Fatal(fmt.Println("Error: ", err))
 	}
@@ -19,7 +19,7 @@ func GetWord() string {
 	if runtime.GOOS == "windows" {
 		sep = string([]byte{13, 10})
 	}
-	Words := strings.Split(string(Data), string(sep))
+	Words := strings.Split(string(Content), string(sep))
 	Word := strings.ToUpper(Words[rand.Intn(len(Words))])
 	return Word
 
@@ -37,14 +37,14 @@ func Contains(list []string, n string) bool {
 
 // StartingLettersReveal Reveals (len(word) /2 - 1) letter(s) to the word at the beginning
 func StartingLettersReveal() {
-	game.RevealedLettres = nil
-	NumberOfLetterRevealed := (len(game.Word) / 2) - 1
+	data.RevealedLettres = nil
+	NumberOfLetterRevealed := (len(data.Word) / 2) - 1
 
-	if len(game.Word) >= 3 {
-		for len(game.RevealedLettres) < NumberOfLetterRevealed {
-			RandomLetter := string(game.Word[rand.Intn(len(game.Word))])
-			if !Contains(game.RevealedLettres, RandomLetter) {
-				game.RevealedLettres = append(game.RevealedLettres, RandomLetter)
+	if len(data.Word) >= 3 {
+		for len(data.RevealedLettres) < NumberOfLetterRevealed {
+			RandomLetter := string(data.Word[rand.Intn(len(data.Word))])
+			if !Contains(data.RevealedLettres, RandomLetter) {
+				data.RevealedLettres = append(data.RevealedLettres, RandomLetter)
 			}
 		}
 	}

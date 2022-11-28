@@ -5,8 +5,8 @@ import "fmt"
 // PrintWord Display the word to find without the missing letters
 func PrintWord() {
 	Display := ""
-	for _, l := range game.Word {
-		if Contains(game.RevealedLettres, string(l)) {
+	for _, l := range data.Word {
+		if Contains(data.RevealedLettres, string(l)) {
 			Display += " " + string(l)
 		} else {
 			Display += " _"

@@ -10,18 +10,18 @@ type Game struct {
 	Guess, RevealedLettres []string
 }
 
-var game Game
+var data Game
 
 func NewGame() {
-	game.Word = GetWord()
-	game.Tries = 0
+	data.Word = GetWord()
+	data.Tries = 0
 	StartingLettersReveal()
 }
 
 // WordIsCompleted returns true if the word is fully completed
 func WordIsCompleted() bool {
-	for _, EveryLetter := range game.Word {
-		if !Contains(game.RevealedLettres, string(EveryLetter)) {
+	for _, EveryLetter := range data.Word {
+		if !Contains(data.RevealedLettres, string(EveryLetter)) {
 			return false
 		}
 	}
@@ -30,8 +30,8 @@ func WordIsCompleted() bool {
 
 // IsGoodAnswer returns true if the word contains the letter guessed
 func IsGoodAnswer(guess string) bool {
-	for _, l := range game.Word {
-		if string(l) == guess || len(guess) > 1 && guess == game.Word {
+	for _, l := range data.Word {
+		if string(l) == guess || len(guess) > 1 && guess == data.Word {
 			return true
 		}
 	}
@@ -43,18 +43,18 @@ func ProcessLetter(guess string) {
 	if IsGoodAnswer(guess) {
 		if len(guess) > 1 {
 			for _, i := range guess {
-				game.RevealedLettres = append(game.RevealedLettres, string(i))
+				data.RevealedLettres = append(data.RevealedLettres, string(i))
 			}
 		} else {
-			game.RevealedLettres = append(game.RevealedLettres, guess)
+			data.RevealedLettres = append(data.RevealedLettres, guess)
 		}
 	} else {
-		if len(guess) > 1 && game.Tries < 9 {
-			game.Tries++
+		if len(guess) > 1 && data.Tries < 9 {
+			data.Tries++
 		} else {
-			game.Guess = append(game.Guess, guess)
+			data.Guess = append(data.Guess, guess)
 		}
-		game.Tries++
+		data.Tries++
 		PrintHangman()
 	}
 }
@@ -67,7 +67,7 @@ func Run(Save string) {
 		NewGame()
 	}
 
-	for game.Tries < 10 && !WordIsCompleted() {
+	for data.Tries < 10 && !WordIsCompleted() {
 		PrintWord()
 		guess := AskForLetter()
 		ProcessLetter(guess)

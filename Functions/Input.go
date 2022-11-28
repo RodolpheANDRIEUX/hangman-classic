@@ -37,15 +37,15 @@ func AskForLetter() string {
 			os.Exit(1)
 
 		case guess == "DEVMODE":
-			fmt.Println(game.Word)
+			fmt.Println(data.Word)
 
 		case !IsAlpha(guess):
 			fmt.Print("\n\a\x1B[31mPlease, select a letter\x1B[0m\n") // Please, select a letter
 
-		case Contains(game.RevealedLettres, guess):
+		case Contains(data.RevealedLettres, guess):
 			fmt.Print("\n\a\x1B[31mThis letter has already been Revealed\x1B[0m\n") // This letter has already been Revealed
 
-		case Contains(game.Guess, guess):
+		case Contains(data.Guess, guess):
 			fmt.Print("\n\a\x1B[31mThis letter has already been chosen\x1B[0m\n") // This letter has already been chosen
 
 		default:
