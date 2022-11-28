@@ -2,7 +2,7 @@ package main
 
 import (
 	"flag"
-	hangman "hangman-classic-for-web/Fonctions"
+	hangman "hangman/Functions"
 	"math/rand"
 	"time"
 )

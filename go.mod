@@ -1,3 +1,3 @@
-module hangman-classic-for-web
+module hangman
 
 go 1.19
